@@ -30,15 +30,34 @@ let data = {
     "MobileVersion": "1.5"
 }
 
+let instituteUrl;
+
 app.post('/login', async (req, res) => {
     let tmp;
     data.UserLogin = req.body.username;
     data.Password = req.body.passwd;
     console.log(req.body.url)
+    instituteUrl = req.body.url;
     await axios.post(req.body.url + "/GetMessages", data).then((post_res) => {
         tmp = post_res.data
     })
-    res.render('second.ejs', {
+
+    if (tmp.ErrorMessage != "") {
+        res.redirect('/');
+        return;
+    } else {
+        res.render('second.ejs', {
+            neptunCode: data.UserLogin,
+        })
+    }
+})
+
+app.get('/GetMessages', async (req, res) => {
+    await axios.post(instituteUrl + "/GetMessages", data).then((post_res) => {
+        tmp = post_res.data
+    })
+
+    res.render('messages.ejs', {
         messages: tmp.MessagesList
     })
 })
