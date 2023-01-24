@@ -12,14 +12,18 @@
         <th>Tárgy neve</th>
         <th>Kredit</th>
         <th>Típus</th>
-        <% addedSubjects.forEach(element => { %>
+        <%
+        let sum = 0;
+        addedSubjects.forEach(element => { 
+            sum = sum + Number(element.SubjectCredit); %>
             <tr>
                 <td><%- element.SubjectCode %> </td>
                 <td><%- element.SubjectName %> </td>
                 <td><%- element.SubjectCredit %> </td>
                 <td><%- element.SubjectType %> </td>
             </tr>
-        <% }) %>
+            <% }) %>
     </table>
+    <br>Összes felvett kredit: <%- sum %> 
 </body>
 </html>

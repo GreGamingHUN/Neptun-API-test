@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
     });
 })
 
-let data = {
+let dataDefault = {
     "TotalRowCount": -1,
     "ExceptionsEnum": 0,
     "UserLogin": "dummy",
@@ -29,6 +29,8 @@ let data = {
     "ErrorMessage": "",
     "MobileVersion": "1.5"
 }
+
+let data = dataDefault;
 
 let instituteUrl;
 
@@ -65,8 +67,8 @@ const GetAddedSubjects = async function (url) {
 }
 
 app.post('/login', async (req, res) => {
-    data.UserLogin = req.body.username;
-    data.Password = req.body.passwd;
+    dataDefault.UserLogin = req.body.username;
+    dataDefault.Password = req.body.passwd;
     instituteUrl = req.body.url;
     let tmp = await GetMessages(instituteUrl);
     console.log(tmp);
@@ -94,7 +96,10 @@ app.post('/GetAddedSubjects', async (req, res) => {
     res.render('subjects.ejs', {
         addedSubjects: tmp.AddedSubjectsList
     })
+    data = dataDefault;
 })
+
+
 
 app.use(express.static('public'))
 
