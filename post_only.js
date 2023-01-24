@@ -14,7 +14,7 @@ const data = {
   "MobileVersion": "1.5"
 }
 
-axios.post('https://neptun.szte.hu/hallgato/MobileService.svc/SetReadedMessage', data).then((res) => {
+axios.post('https://neptun.szte.hu/hallgato/MobileService.svc/GetCurriculums', data).then((res) => {
 tmp = res.data;
 console.log(tmp);
 })

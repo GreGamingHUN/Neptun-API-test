@@ -5,9 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neptun - Főoldal</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     Helló, <%- neptunCode %>
     <a href="GetMessages">Üzenetek</a>
+    <h1>Szemesztereid:</h1>
+    <table>
+        <th>ID</th>
+        <th>Megnevezés</th>
+        <th>Megtekintés</th>
+        <% terms.forEach(element => { %>
+            <tr>
+                <td><%- element.Id %> </td>
+                <td><%- element.TermName %> </td>
+                <td>
+                    <form action="GetAddedSubjects" method="post">
+                        
+                        <button type="submit" name="termid" value=<%- element.Id %>>Felvett tárgyak megtekintése</button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+    <h1>Mintatanterveid:</h1>
+    <table>
+        <th>ID</th>
+        <th>Megnevezés</th>
+        <% curriculums.forEach(element => { %>
+            <tr>
+                <td><%- element.ID %> </td>
+                <td><%- element.CurriculumName %> </td>
+            </tr>
+        <% }) %>
+    </table>
 </body>
 </html>
