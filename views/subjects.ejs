@@ -15,12 +15,17 @@
         <%
         let sum = 0;
         addedSubjects.forEach(element => { 
-            sum = sum + Number(element.SubjectCredit); %>
+        sum = sum + Number(element.SubjectCredit); %>
             <tr>
                 <td><%- element.SubjectCode %> </td>
                 <td><%- element.SubjectName %> </td>
                 <td><%- element.SubjectCredit %> </td>
                 <td><%- element.SubjectType %> </td>
+                <td>
+                    <form action="GetCourses" method="post">
+                        <button type="submit" name="subjectid" value="<%- element.SubjectID %>">Kurzusok megtekintése</button>
+                    </form>
+                </td>
             </tr>
             <% }) %>
     </table>

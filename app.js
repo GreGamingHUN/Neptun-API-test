@@ -34,6 +34,8 @@ let data = dataDefault;
 
 let instituteUrl;
 
+let curriculumId;
+
 const GetMessages = async function(url) {
     let tmp;
     await axios.post(url + "/GetMessages", data).then((post_res) => {
@@ -74,6 +76,7 @@ app.post('/login', async (req, res) => {
     console.log(tmp);
     let termlist = await GetPeriodTerms(instituteUrl);
     let curriculumlist = await GetCurriculums(instituteUrl);
+    curriculumId = curriculumlist.CurriculumList[0].ID
     res.render('second.ejs', {
         neptunCode: data.UserLogin,
         url: instituteUrl,
@@ -99,6 +102,13 @@ app.post('/GetAddedSubjects', async (req, res) => {
     data = dataDefault;
 })
 
+app.post('/GetCourses', async (req, res) => {
+    let filter = {
+        "Id": req.body.subjectid,
+        "SubjectType": 0,
+        "CurriculumID": curriculumId
+    }
+})
 
 
 app.use(express.static('public'))
